@@ -1,0 +1,267 @@
+.blessings-section {
+  width: 100%;
+  padding: 100px 24px;
+  background: #fffaf0;
+  color: #283451;
+}
+
+.blessings-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.blessings-eyebrow {
+  margin: 0 0 14px;
+  color: #a47b35;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.blessings-title {
+  margin: 0;
+  color: #283451;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(2.5rem, 6vw, 4.2rem);
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.blessings-title span {
+  color: #b58a3b;
+  font-style: italic;
+}
+
+.blessings-intro {
+  max-width: 600px;
+  margin: 22px auto 48px;
+  color: #716b66;
+  font-family: Poppins, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.blessings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+}
+
+.blessing-card {
+  overflow: hidden;
+  border: 1px solid #eadfc9;
+  border-radius: 14px;
+  background: #fffdf8;
+  box-shadow: 0 6px 20px rgb(65 48 28 / 5%);
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.blessing-card.expanded {
+  border-color: #d5bb83;
+  box-shadow: 0 10px 28px rgb(65 48 28 / 9%);
+}
+
+.blessing-card-button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 18px;
+  padding: 24px 28px;
+  border: 0;
+  background: transparent;
+  color: #283451;
+  text-align: left;
+  cursor: pointer;
+}
+
+.blessing-card-button:focus-visible {
+  outline: 3px solid #b58a3b;
+  outline-offset: -4px;
+}
+
+.blessing-emoji {
+  flex-shrink: 0;
+  font-size: 1.8rem;
+}
+
+.blessing-card-title {
+  flex: 1;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.25rem, 3vw, 1.65rem);
+  font-weight: 600;
+}
+
+.blessing-toggle {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  place-items: center;
+  border: 1px solid #d9c18f;
+  border-radius: 50%;
+  color: #a47b35;
+  font-family: Arial, sans-serif;
+  font-size: 1.4rem;
+}
+
+.blessing-message {
+  margin: 0;
+  padding: 0 78px 28px;
+  color: #71645a;
+  font-family: Poppins, sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.9;
+  animation: blessing-reveal 300ms ease both;
+}
+
+.blessings-finale {
+  max-width: 700px;
+  margin: 100px auto 0;
+  padding: 50px 30px;
+  border: 1px solid #e7d8bd;
+  border-radius: 22px;
+  background: #f8f0df;
+  box-shadow: 0 14px 36px rgb(65 48 28 / 6%);
+  text-align: center;
+}
+
+.finale-flower {
+  display: inline-block;
+  margin-bottom: 16px;
+  font-size: 3rem;
+  animation: finale-float 3s ease-in-out infinite;
+}
+
+.finale-small {
+  margin: 0 0 12px;
+  color: #a47b35;
+  font-family: Poppins, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.finale-title {
+  margin: 0;
+  color: #283451;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  font-weight: 500;
+}
+
+.finale-message {
+  max-width: 530px;
+  margin: 22px auto;
+  color: #71645a;
+  font-family: Poppins, sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.9;
+}
+
+.finale-signature {
+  margin: 24px 0 0;
+  color: #a47b35;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.4rem;
+  font-style: italic;
+}
+
+.replay-button {
+  margin-top: 34px;
+  padding: 13px 26px;
+  border: 1px solid #b58a3b;
+  border-radius: 999px;
+  background: transparent;
+  color: #80642e;
+  font-family: Poppins, sans-serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease,
+    transform 200ms ease;
+}
+
+.replay-button:hover {
+  transform: translateY(-2px);
+  background: #b58a3b;
+  color: #fffdf8;
+}
+
+.replay-button:focus-visible {
+  outline: 3px solid #283451;
+  outline-offset: 4px;
+}
+
+@keyframes blessing-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes finale-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@media (max-width: 600px) {
+  .blessings-section {
+    padding: 70px 18px;
+  }
+
+  .blessings-intro {
+    margin-bottom: 34px;
+    font-size: 0.88rem;
+  }
+
+  .blessing-card-button {
+    gap: 12px;
+    padding: 20px 16px;
+  }
+
+  .blessing-emoji {
+    font-size: 1.5rem;
+  }
+
+  .blessing-message {
+    padding: 0 20px 24px;
+    font-size: 0.85rem;
+  }
+
+  .blessings-finale {
+    margin-top: 70px;
+    padding: 40px 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .finale-flower {
+    animation: none;
+  }
+
+  .blessing-message {
+    animation: none;
+  }
+
+  .replay-button {
+    transition: none;
+  }
+}

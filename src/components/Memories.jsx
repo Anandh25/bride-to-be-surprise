@@ -1,0 +1,260 @@
+import { useState } from "react";
+import "./Memories.css";
+
+const memoryChapters = [
+  {
+    id: 1,
+    title: "The Little Girl We All Love",
+    subtitle: "Once upon a little time...",
+    description:
+      "From those tiny little steps to the beautiful person you are today, every moment has been precious.",
+    memories: [
+      {
+        id: 1,
+        label: "Little beginnings",
+        caption:
+          "The little girl who filled every room with her own kind of magic. ❤️",
+        placeholder: "Childhood photo",
+        emoji: "🧸",
+        image:
+          "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80",
+      },
+      {
+        id: 2,
+        label: "Tiny adventures",
+        caption:
+          "Small hands, big dreams, and a thousand little adventures waiting to happen.",
+        placeholder: "Cute childhood moment",
+        emoji: "🌸",
+        image:
+          "https://images.unsplash.com/photo-1472162072942-cd5147eb3902?w=900&auto=format&fit=crop&q=80",
+      },
+      {
+        id: 3,
+        label: "Growing up",
+        caption:
+          "Some things changed as you grew up, but that beautiful smile stayed the same.",
+        placeholder: "Growing-up memory",
+        emoji: "🦋",
+        image:
+          "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=900&auto=format&fit=crop&q=80",
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "Partners in Crime",
+    subtitle: "Two sisters. Endless stories.",
+    description:
+      "The silly fights, the secret conversations, the laughter, and the memories only the two of you understand.",
+    memories: [
+      {
+        id: 4,
+        label: "Double trouble",
+        caption:
+          "Together, you were always twice the fun and probably twice the trouble. 😄",
+        placeholder: "Sisters childhood photo",
+        emoji: "👭",
+        image:
+          "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80",
+      },
+      {
+        id: 5,
+        label: "Secret conversations",
+        caption:
+          "Some stories are too special to explain to anyone else. Only sisters understand.",
+        placeholder: "Sisters bonding moment",
+        emoji: "💌",
+        image:
+          "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=900&auto=format&fit=crop&q=80",
+      },
+      {
+        id: 6,
+        label: "Still the same team",
+        caption:
+          "Different chapters, different versions of you, but always the same team. ❤️",
+        placeholder: "Recent sisters photo",
+        emoji: "🤍",
+        image:
+          "https://images.unsplash.com/photo-1529636798458-92182e662485?w=900&auto=format&fit=crop&q=80",
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "The People Who Made You, You",
+    subtitle: "A lifetime of love, in little moments.",
+    description:
+      "Behind the person you are today is a family that loved you, guided you, and stood beside you through it all.",
+    memories: [
+      {
+        id: 7,
+        label: "Dad's little girl",
+        caption:
+          "No matter how grown up you become, you'll always be his little girl. ❤️",
+        placeholder: "Bride with her father",
+        emoji: "👨‍👧",
+        image:
+          "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80",
+      },
+      {
+        id: 8,
+        label: "A mother's love",
+        caption:
+          "A love that comforted you, cheered for you, and stayed with you through every chapter.",
+        placeholder: "Bride with her mother",
+        emoji: "🌷",
+        image:
+          "https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=900&auto=format&fit=crop&q=80",
+      },
+      {
+        id: 9,
+        label: "All together",
+        caption:
+          "Your first home, your forever people, and a love you'll carry wherever life takes you.",
+        placeholder: "Family photo",
+        emoji: "🏡",
+        image:
+          "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80",
+      },
+    ],
+  },
+];
+
+function Memories() {
+  // Store every revealed memory ID.
+  // Revealed cards stay open until the page is reloaded.
+  const [revealedMemories, setRevealedMemories] = useState([]);
+
+  const revealMemory = (memoryId) => {
+    setRevealedMemories((currentMemories) => {
+      // If already revealed, keep it revealed.
+      if (currentMemories.includes(memoryId)) {
+        return currentMemories;
+      }
+
+      // Add the newly revealed memory.
+      return [...currentMemories, memoryId];
+    });
+  };
+
+  return (
+    <section className="memories-section" id="memories">
+      <div className="memories-container">
+        <header className="memories-header">
+          <p className="memories-eyebrow">A LITTLE JOURNEY THROUGH TIME</p>
+
+          <h2>
+            Our Little <span>World</span>
+          </h2>
+
+          <p className="memories-intro">
+            Every picture holds a story.
+            <br />
+            Every story holds a little piece of our hearts.
+          </p>
+        </header>
+
+        {memoryChapters.map((chapter) => (
+          <article className="memory-chapter" key={chapter.id}>
+            <div className="chapter-heading">
+              <p className="chapter-subtitle">{chapter.subtitle}</p>
+
+              <h3>{chapter.title}</h3>
+
+              <p className="chapter-description">{chapter.description}</p>
+            </div>
+
+            <div className="memory-grid">
+              {chapter.memories.map((memory, index) => {
+                const isRevealed = revealedMemories.includes(memory.id);
+
+                return (
+                  <button
+                    type="button"
+                    className={`memory-card ${
+                      isRevealed ? "memory-card-active" : ""
+                    }`}
+                    key={memory.id}
+                    onClick={() => revealMemory(memory.id)}
+                    aria-expanded={isRevealed}
+                    aria-label={
+                      isRevealed
+                        ? `${memory.label} - memory revealed`
+                        : `Reveal memory: ${memory.label}`
+                    }
+                  >
+                    <div className={`memory-photo memory-photo-${index + 1}`}>
+                      {isRevealed ? (
+                        <>
+                          {memory.image ? (
+                            <img
+                              src={memory.image}
+                              alt={memory.placeholder}
+                              className="memory-sample-image"
+                              loading="lazy"
+                            />
+                          ) : (
+                            <>
+                              <span className="memory-placeholder-emoji">
+                                {memory.emoji}
+                              </span>
+
+                              <span className="memory-placeholder-label">
+                                {memory.placeholder}
+                              </span>
+                            </>
+                          )}
+
+                          <span className="memory-tap-hint">
+                            Memory revealed ♡
+                          </span>
+                        </>
+                      ) : (
+                        <div className="memory-hidden-content">
+                          <span className="memory-question-mark">?</span>
+
+                          <span className="memory-hidden-label">
+                            A little surprise awaits...
+                          </span>
+
+                          <span className="memory-tap-hint">
+                            Tap to reveal ♡
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="memory-card-content">
+                      <span className="memory-card-label">{memory.label}</span>
+
+                      {isRevealed && (
+                        <span className="memory-caption memory-caption-revealed">
+                          {memory.caption}
+                        </span>
+                      )}
+
+                      {!isRevealed && (
+                        <span className="memory-caption memory-caption-hidden">
+                          Tap the card to uncover this memory ♡
+                        </span>
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </article>
+        ))}
+
+        <footer className="memories-footer">
+          <p>And through every little moment, one thing remained the same...</p>
+
+          <h3>You were always surrounded by love. ♡</h3>
+        </footer>
+      </div>
+    </section>
+  );
+}
+
+export default Memories;

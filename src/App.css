@@ -1,0 +1,367 @@
+#root {
+  min-height: 100vh;
+}
+
+.invitation-page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  overflow: hidden;
+
+  background: linear-gradient(135deg, #a18ac4 0%, #8066a8 55%, #6c568f 100%);
+
+  color: #fff9ff;
+}
+
+.invitation-cover {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+
+  padding: 40px 24px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  /* Full-screen violet background — no separate card */
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+
+  color: #fff9ff;
+  z-index: 2;
+}
+
+.cover-eyebrow {
+  margin: 0 0 42px;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-align: center;
+}
+
+.envelope {
+  position: relative;
+
+  width: min(80vw, 480px);
+  height: min(300px, 35vh);
+
+  min-height: 190px;
+
+  perspective: 1000px;
+
+  background: #e8dcf1;
+  border: 1px solid #d6c3e7;
+
+  box-shadow: 0 16px 30px rgba(45, 29, 67, 0.2);
+}
+
+.envelope-letter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f8f1fb;
+  color: #6e568b;
+  text-align: center;
+}
+
+.envelope-heart {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 32px;
+}
+
+.envelope-letter p {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.envelope-panel {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.envelope-left {
+  z-index: 2;
+  background: #d6c4e7;
+  clip-path: polygon(0 0, 52% 50%, 0 100%);
+}
+
+.envelope-right {
+  z-index: 2;
+  background: #cbb6df;
+  clip-path: polygon(100% 0, 48% 50%, 100% 100%);
+}
+
+.envelope-bottom {
+  z-index: 3;
+  background: #dfd0ed;
+  clip-path: polygon(0 100%, 50% 48%, 100% 100%);
+}
+
+.envelope-flap {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: #f0e7f6;
+  clip-path: polygon(0 0, 100% 0, 50% 55%);
+  transform-origin: top center;
+  backface-visibility: visible;
+}
+
+.seal-button {
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  z-index: 5;
+  width: 66px;
+  height: 66px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -10%);
+  border: 2px solid #ead9b0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #e8c978, #b58b45 75%);
+  color: #fff9df;
+  box-shadow: 0 5px 14px rgba(68, 44, 88, 0.3);
+  cursor: pointer;
+}
+
+.seal-button:disabled {
+  cursor: default;
+}
+
+.seal-icon {
+  font-size: 27px;
+}
+
+.seal-shine {
+  position: absolute;
+  top: 9px;
+  left: 13px;
+  width: 15px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.75);
+  transform: rotate(-35deg);
+}
+
+.cover-instruction {
+  margin: 42px 0 10px;
+  font-family: Georgia, serif;
+  font-size: 17px;
+  font-style: italic;
+  text-align: center;
+}
+
+.cover-hint {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 2px;
+  opacity: 0.8;
+}
+
+.cover-decoration {
+  position: absolute;
+  color: #f4e4b7;
+  opacity: 0.8;
+}
+
+.decoration-top {
+  top: 25px;
+  right: 30px;
+  font-size: 34px;
+}
+
+.decoration-bottom {
+  bottom: 24px;
+  left: 30px;
+  font-size: 42px;
+}
+
+/* Welcome screen is hidden until the GSAP timeline reveals it */
+.welcome-screen {
+  position: relative;
+  width: min(100%, 900px);
+  min-height: 560px;
+  padding: 48px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.welcome-butterfly {
+  display: block;
+  margin-bottom: 28px;
+  font-size: 42px;
+  opacity: 0;
+}
+
+.welcome-copy {
+  opacity: 0;
+}
+
+.welcome-eyebrow {
+  margin: 0 0 24px;
+  color: #f3dfb8;
+  font-size: 11px;
+  letter-spacing: 4px;
+}
+
+.welcome-screen h1 {
+  margin: 0;
+  color: #fff9ff;
+  font-family: Georgia, serif;
+  font-size: clamp(32px, 7vw, 58px);
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.welcome-screen h1 span {
+  color: #f0d49a;
+  font-style: italic;
+}
+
+.welcome-divider {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 30px 0;
+  color: #c19a68;
+  font-size: 20px;
+}
+
+.welcome-message {
+  margin: 0;
+  color: #f5edf9;
+  font-family: Georgia, serif;
+  font-size: clamp(16px, 3.5vw, 20px);
+  line-height: 1.8;
+}
+
+.welcome-signature {
+  margin: 34px 0 0;
+  color: #f3dfb8;
+  font-family: Georgia, serif;
+  font-size: 18px;
+  font-style: italic;
+}
+
+@media (max-width: 480px) {
+  .invitation-page {
+    padding: 0;
+  }
+
+  .invitation-cover {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    padding: 30px 18px;
+  }
+
+  .envelope {
+    width: min(88vw, 340px);
+    height: 210px;
+    min-height: 0;
+  }
+
+  .cover-eyebrow {
+    font-size: 10px;
+    letter-spacing: 3px;
+    margin-bottom: 32px;
+  }
+
+  .cover-instruction {
+    font-size: 15px;
+    margin-top: 32px;
+  }
+
+  .cover-hint {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+  }
+}
+
+/* ================================
+   BACKGROUND MUSIC BUTTON
+================================ */
+
+.sound-toggle-button {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 1000;
+
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(161, 126, 155, 0.45);
+  border-radius: 50%;
+
+  background: rgba(255, 253, 249, 0.92);
+  color: #8066a8;
+
+  box-shadow: 0 4px 14px rgba(79, 57, 86, 0.12);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.sound-toggle-button:hover {
+  transform: translateY(-3px);
+  background: #fffdf9;
+  box-shadow: 0 7px 18px rgba(79, 57, 86, 0.18);
+}
+
+.sound-toggle-button:focus-visible {
+  outline: 2px solid #a184a8;
+  outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  .sound-toggle-button {
+    right: 16px;
+    bottom: 16px;
+    width: 42px;
+    height: 42px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sound-toggle-button {
+    transition: none;
+  }
+}

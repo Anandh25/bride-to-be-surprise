@@ -1,0 +1,184 @@
+.funny-section {
+  width: 100%;
+  padding: 100px 24px;
+  background: #fffaf0;
+  color: #283451;
+}
+
+.funny-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.funny-eyebrow {
+  margin: 0 0 14px;
+  color: #a47b35;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.funny-title {
+  margin: 0;
+  color: #283451;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(2.5rem, 6vw, 4.2rem);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.funny-title span {
+  color: #b58a3b;
+  font-style: italic;
+}
+
+.funny-description {
+  max-width: 620px;
+  margin: 22px auto 52px;
+  color: #716b66;
+  font-family: Poppins, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.funny-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.funny-card {
+  display: flex;
+  min-height: 250px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 24px;
+  border: 1px solid #eadfc9;
+  border-radius: 18px;
+  background: #fffdf8;
+  box-shadow: 0 8px 24px rgb(65 48 28 / 6%);
+  color: #283451;
+  font-family: inherit;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    transform 250ms ease,
+    box-shadow 250ms ease,
+    background-color 250ms ease;
+}
+
+.funny-card:hover {
+  transform: translateY(-6px) rotate(-1deg);
+  box-shadow: 0 14px 30px rgb(65 48 28 / 11%);
+}
+
+.funny-card:focus-visible {
+  outline: 3px solid #b58a3b;
+  outline-offset: 4px;
+}
+
+.funny-card-emoji {
+  display: block;
+  margin-bottom: 18px;
+  font-size: 2.5rem;
+}
+
+.funny-card-title {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.65rem;
+  font-weight: 600;
+}
+
+.funny-card-hint {
+  margin-top: 18px;
+  color: #a47b35;
+  font-family: Poppins, sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+
+.funny-card-message {
+  margin: 18px 0 0;
+  color: #6f6258;
+  font-family: Poppins, sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.8;
+  animation: funny-message-appear 350ms ease both;
+}
+
+.funny-card.revealed {
+  background: #f8f0df;
+  border-color: #d9c18f;
+}
+
+.funny-ending {
+  max-width: 700px;
+  margin: 58px auto 0;
+  color: #806b59;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+@keyframes funny-message-appear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 850px) {
+  .funny-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .funny-section {
+    padding: 80px 20px;
+  }
+}
+
+@media (max-width: 560px) {
+  .funny-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .funny-section {
+    padding: 64px 18px;
+  }
+
+  .funny-description {
+    margin-bottom: 36px;
+    font-size: 0.88rem;
+  }
+
+  .funny-card {
+    min-height: 220px;
+    padding: 28px 22px;
+  }
+
+  .funny-ending {
+    margin-top: 42px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .funny-card {
+    transition: none;
+  }
+
+  .funny-card-message {
+    animation: none;
+  }
+}

@@ -1,0 +1,58 @@
+.falling-decorations {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.falling-decoration {
+  position: absolute;
+  top: -50px;
+  display: block;
+  opacity: 0;
+  color: #c5a6df;
+  filter: drop-shadow(0 2px 4px rgb(181 138 59 / 15%));
+  animation-name: decoration-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes decoration-fall {
+  0% {
+    transform: translate3d(0, -30px, 0) rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.75;
+  }
+
+  50% {
+    transform: translate3d(35px, 50vh, 0) rotate(180deg);
+    opacity: 0.65;
+  }
+
+  90% {
+    opacity: 0.55;
+  }
+
+  100% {
+    transform: translate3d(-25px, 110vh, 0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .falling-decoration {
+    filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .falling-decoration {
+    animation: none;
+    display: none;
+  }
+}
