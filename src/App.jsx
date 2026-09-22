@@ -236,10 +236,10 @@ function App() {
           </div>
 
           <p className="cover-instruction">
-            A little surprise is waiting for you
+            Someone special has a little something for you ♡
           </p>
 
-          <p className="cover-hint">Tap the seal to open ♡</p>
+          <p className="cover-hint">Tap the seal to open</p>
         </div>
 
         {/* ================================
