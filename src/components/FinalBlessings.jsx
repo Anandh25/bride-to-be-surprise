@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./FinalBlessings.css";
 
 const blessings = [
@@ -39,8 +39,50 @@ const blessings = [
   },
 ];
 
+function LetterReveal({ text, className, visible }) {
+  return (
+    <p className={className} aria-label={text}>
+      <span aria-hidden="true">
+        {Array.from(text).map((character, index) => (
+          <span
+            key={index}
+            className={`finale-letter ${visible ? "visible" : ""}`}
+            style={{ animationDelay: `${index * 18}ms` }}
+          >
+            {character === " " ? "\u00A0" : character}
+          </span>
+        ))}
+      </span>
+    </p>
+  );
+}
+
 function FinalBlessings() {
   const [expandedBlessing, setExpandedBlessing] = useState(null);
+  const finaleRef = useRef(null);
+  const [finaleVisible, setFinaleVisible] = useState(false);
+
+  useEffect(() => {
+    const finaleElement = finaleRef.current;
+
+    if (!finaleElement) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setFinaleVisible(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.2,
+      },
+    );
+
+    observer.observe(finaleElement);
+
+    return () => observer.disconnect();
+  }, []);
 
   const toggleBlessing = (id) => {
     setExpandedBlessing((previous) => (previous === id ? null : id));
@@ -92,14 +134,24 @@ function FinalBlessings() {
                 </button>
 
                 {isExpanded && (
-                  <p className="blessing-message">{blessing.message}</p>
+                  <div className="blessing-expanded-content">
+                    <p className="blessing-message">{blessing.message}</p>
+
+                    {blessing.id === 4 && (
+                      <div className="copper-paw-prints" aria-hidden="true">
+                        <span>🐾</span>
+                        <span>🐾</span>
+                        <span>🐾</span>
+                      </div>
+                    )}
+                  </div>
                 )}
               </article>
             );
           })}
         </div>
 
-        <div className="blessings-finale">
+        <div className="blessings-finale" ref={finaleRef}>
           <span className="finale-flower" aria-hidden="true">
             🌷
           </span>
@@ -108,15 +160,45 @@ function FinalBlessings() {
 
           <h3 className="finale-title">Happy Bride-to-Be! 💍</h3>
 
-          <p className="finale-message">
-            May your heart always be full, your home always be warm, and your
-            days always hold a little magic. You are so loved — today, tomorrow,
-            and always. ❤️
-          </p>
+          <LetterReveal
+            className="finale-message"
+            visible={finaleVisible}
+            text="As you begin this beautiful new chapter, remember that no matter how far life takes you, you will always have a home in our hearts. May your marriage be filled with endless love, laughter, patience, and countless beautiful memories. ❤️"
+          />
 
-          <p className="finale-signature">
-            With love, from everyone who loves you. 💕
-          </p>
+          <div className="finale-family-row">
+            <LetterReveal
+              className="finale-message"
+              visible={finaleVisible}
+              text="Amma, Appa, Princy, and Copper will always be cheering for you. We may miss having you around every day, but we will always be here for you—with open arms, warm hugs, and all our love. 🏡"
+            />
+
+            <svg
+              className="finale-paw"
+              viewBox="0 0 48 48"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label="paw print"
+              role="img"
+            >
+              <ellipse cx="24" cy="31" rx="11" ry="9" fill="currentColor" />
+              <ellipse cx="11" cy="17" rx="5" ry="7" fill="currentColor" />
+              <ellipse cx="21" cy="11" rx="5" ry="7" fill="currentColor" />
+              <ellipse cx="31" cy="12" rx="5" ry="7" fill="currentColor" />
+              <ellipse cx="39" cy="20" rx="5" ry="7" fill="currentColor" />
+            </svg>
+          </div>
+
+          <LetterReveal
+            className="finale-signature"
+            visible={finaleVisible}
+            text="You are loved more than words can say. Today, tomorrow, and always. 💕"
+          />
+
+          <LetterReveal
+            className="finale-signature"
+            visible={finaleVisible}
+            text="With all our love, forever and always. ❤️"
+          />
 
           <button
             type="button"

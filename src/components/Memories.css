@@ -460,3 +460,265 @@
     transition: none;
   }
 }
+
+/* ================================
+   POLAROID PHOTO REVEAL
+================================ */
+
+.memory-card-active .memory-photo {
+  perspective: 1000px;
+}
+
+.polaroid-photo-reveal {
+  animation: polaroid-reveal 700ms cubic-bezier(0.2, 0.75, 0.3, 1) both;
+  transform-origin: center;
+}
+
+@keyframes polaroid-reveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.78) rotate(-7deg);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale(1.04) rotate(2deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .polaroid-photo-reveal {
+    animation: none;
+  }
+}
+
+/* Keep memory photo areas the same size before and after reveal */
+.memory-photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Make revealed images fit the fixed photo area */
+.memory-photo .memory-sample-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* =====================================
+   MEMORY PHOTO POPUP
+===================================== */
+
+.memory-popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  /* Darken the background so the photo stands out. */
+  background: rgba(35, 28, 43, 0.78);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  animation: memory-overlay-appear 250ms ease both;
+}
+
+.memory-popup {
+  position: relative;
+
+  width: min(100%, 650px);
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  padding: 14px;
+
+  border: 1px solid #e6d9e5;
+  border-radius: 12px;
+
+  background: #fffaf5;
+
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.35);
+
+  animation: memory-popup-appear 350ms cubic-bezier(0.2, 0.75, 0.3, 1) both;
+}
+
+.memory-popup-image {
+  display: block;
+
+  width: 100%;
+  max-height: 65vh;
+
+  object-fit: contain;
+
+  border-radius: 7px;
+  background: #f1e8ee;
+}
+
+.memory-popup-close {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 38px;
+
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+
+  background: rgba(255, 250, 245, 0.95);
+  color: #59456b;
+
+  font-size: 1.1rem;
+  cursor: pointer;
+
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18);
+
+  transition:
+    transform 200ms ease,
+    background-color 200ms ease;
+}
+
+.memory-popup-close:hover {
+  transform: scale(1.08);
+  background: #ffffff;
+}
+
+.memory-popup-close:focus-visible {
+  outline: 3px solid #a184a8;
+  outline-offset: 3px;
+}
+
+.memory-popup-caption {
+  padding: 18px 12px 12px;
+  text-align: center;
+}
+
+.memory-popup-caption h3 {
+  margin: 0 0 10px;
+
+  color: #59456b;
+
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.7rem, 4vw, 2.3rem);
+  font-weight: 500;
+  font-style: italic;
+}
+
+.memory-popup-caption p {
+  margin: 0;
+
+  color: #716477;
+
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  line-height: 1.6;
+}
+
+.memory-popup-placeholder {
+  display: flex;
+  min-height: 250px;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 7px;
+  background: #f1e8ee;
+
+  color: #806b91;
+  text-align: center;
+}
+
+.memory-popup-placeholder span {
+  font-size: 4rem;
+}
+
+.memory-popup-placeholder p {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.3rem;
+}
+
+@keyframes memory-overlay-appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes memory-popup-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.88) translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Mobile adjustments */
+
+@media (max-width: 600px) {
+  .memory-popup-overlay {
+    padding: 14px;
+  }
+
+  .memory-popup {
+    width: 100%;
+    max-height: 88vh;
+    padding: 9px;
+  }
+
+  .memory-popup-image {
+    max-height: 58vh;
+  }
+
+  .memory-popup-close {
+    top: 16px;
+    right: 16px;
+
+    width: 34px;
+    height: 34px;
+  }
+
+  .memory-popup-caption {
+    padding: 14px 8px 10px;
+  }
+}
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  .memory-popup-overlay,
+  .memory-popup {
+    animation: none;
+  }
+
+  .memory-popup-close {
+    transition: none;
+  }
+}

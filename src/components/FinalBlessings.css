@@ -120,6 +120,8 @@
   animation: blessing-reveal 300ms ease both;
 }
 
+/* FINALE */
+
 .blessings-finale {
   max-width: 700px;
   margin: 100px auto 0;
@@ -200,6 +202,8 @@
   outline-offset: 4px;
 }
 
+/* ANIMATIONS */
+
 @keyframes blessing-reveal {
   from {
     opacity: 0;
@@ -222,6 +226,8 @@
     transform: translateY(-7px);
   }
 }
+
+/* RESPONSIVE */
 
 @media (max-width: 600px) {
   .blessings-section {
@@ -253,6 +259,71 @@
   }
 }
 
+/* COPPER'S LITTLE WISH PAW PRINTS - ORIGINAL EMOJI STYLE */
+
+.copper-paw-prints {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  margin-top: 18px;
+  overflow: hidden;
+}
+
+.copper-paw-prints span {
+  display: inline-block;
+  font-size: 24px;
+  opacity: 0;
+  animation: copper-paw-appear 700ms ease-out forwards;
+}
+
+.copper-paw-prints span:nth-child(1) {
+  animation-delay: 100ms;
+  transform: rotate(-20deg);
+}
+
+.copper-paw-prints span:nth-child(2) {
+  animation-delay: 350ms;
+  transform: rotate(10deg);
+}
+
+.copper-paw-prints span:nth-child(3) {
+  animation-delay: 600ms;
+  transform: rotate(-15deg);
+}
+
+@keyframes copper-paw-appear {
+  0% {
+    opacity: 0;
+    translate: 0 12px;
+    scale: 0.5;
+  }
+
+  70% {
+    opacity: 1;
+    scale: 1.15;
+  }
+
+  100% {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
+}
+
+/* CREAM PAW PRINT BESIDE THE FINALE FAMILY MESSAGE */
+
+.finale-paw {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-left: 3px;
+  vertical-align: -3px;
+  color: #fffaf0;
+}
+
+/* REDUCED MOTION ACCESSIBILITY */
+
 @media (prefers-reduced-motion: reduce) {
   .finale-flower {
     animation: none;
@@ -265,4 +336,62 @@
   .replay-button {
     transition: none;
   }
+
+  .copper-paw-prints span {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* FINALE LETTER-BY-LETTER REVEAL */
+
+.finale-letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.finale-letter.visible {
+  animation: finale-letter-fade-in 350ms ease forwards;
+}
+
+@keyframes finale-letter-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  .finale-letter {
+    opacity: 1;
+    transform: none;
+  }
+
+  .finale-letter.visible {
+    animation: none;
+  }
+}
+
+.finale-family-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.finale-family-row .finale-message {
+  margin: 22px 0;
+}
+
+.finale-family-row .finale-paw {
+  flex-shrink: 0;
 }

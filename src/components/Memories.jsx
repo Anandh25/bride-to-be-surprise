@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Memories.css";
 
 const memoryChapters = [
@@ -16,8 +16,7 @@ const memoryChapters = [
           "The little girl who filled every room with her own kind of magic. ❤️",
         placeholder: "Childhood photo",
         emoji: "🧸",
-        image:
-          "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80",
+        image: "/images/bride-childhood-1.jpeg",
       },
       {
         id: 2,
@@ -26,8 +25,7 @@ const memoryChapters = [
           "Small hands, big dreams, and a thousand little adventures waiting to happen.",
         placeholder: "Cute childhood moment",
         emoji: "🌸",
-        image:
-          "https://images.unsplash.com/photo-1472162072942-cd5147eb3902?w=900&auto=format&fit=crop&q=80",
+        image: "/images/bride-childhood-2.jpeg",
       },
       {
         id: 3,
@@ -36,8 +34,7 @@ const memoryChapters = [
           "Some things changed as you grew up, but that beautiful smile stayed the same.",
         placeholder: "Growing-up memory",
         emoji: "🦋",
-        image:
-          "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=900&auto=format&fit=crop&q=80",
+        image: "/images/bride-childhood-3.jpeg",
       },
     ],
   },
@@ -126,6 +123,9 @@ function Memories() {
   // Revealed cards stay open until the page is reloaded.
   const [revealedMemories, setRevealedMemories] = useState([]);
 
+  // Store the memory currently displayed in the popup.
+  const [activeMemory, setActiveMemory] = useState(null);
+
   const revealMemory = (memoryId) => {
     setRevealedMemories((currentMemories) => {
       // If already revealed, keep it revealed.
@@ -137,6 +137,39 @@ function Memories() {
       return [...currentMemories, memoryId];
     });
   };
+
+  // First click reveals the memory.
+  // Clicking an already-revealed memory opens the popup.
+  const handleMemoryClick = (memory) => {
+    const isRevealed = revealedMemories.includes(memory.id);
+
+    if (!isRevealed) {
+      revealMemory(memory.id);
+      return;
+    }
+
+    setActiveMemory(memory);
+  };
+
+  // Close the photo popup.
+  const closeMemoryPopup = () => {
+    setActiveMemory(null);
+  };
+
+  // Close the popup when the Escape key is pressed.
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        closeMemoryPopup();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   return (
     <section className="memories-section" id="memories">
@@ -176,11 +209,11 @@ function Memories() {
                       isRevealed ? "memory-card-active" : ""
                     }`}
                     key={memory.id}
-                    onClick={() => revealMemory(memory.id)}
+                    onClick={() => handleMemoryClick(memory)}
                     aria-expanded={isRevealed}
                     aria-label={
                       isRevealed
-                        ? `${memory.label} - memory revealed`
+                        ? `${memory.label} - click to enlarge photo`
                         : `Reveal memory: ${memory.label}`
                     }
                   >
@@ -191,7 +224,7 @@ function Memories() {
                             <img
                               src={memory.image}
                               alt={memory.placeholder}
-                              className="memory-sample-image"
+                              className="memory-sample-image polaroid-photo-reveal"
                               loading="lazy"
                             />
                           ) : (
@@ -246,6 +279,51 @@ function Memories() {
             </div>
           </article>
         ))}
+
+        {/* Enlarged photo popup */}
+        {activeMemory && (
+          <div
+            className="memory-popup-overlay"
+            onClick={closeMemoryPopup}
+            role="presentation"
+          >
+            <div
+              className="memory-popup"
+              role="dialog"
+              aria-modal="true"
+              aria-label={`Memory: ${activeMemory.label}`}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <button
+                type="button"
+                className="memory-popup-close"
+                onClick={closeMemoryPopup}
+                aria-label="Close photo"
+                title="Close photo"
+              >
+                ✕
+              </button>
+
+              {activeMemory.image ? (
+                <img
+                  src={activeMemory.image}
+                  alt={activeMemory.placeholder}
+                  className="memory-popup-image"
+                />
+              ) : (
+                <div className="memory-popup-placeholder">
+                  <span>{activeMemory.emoji}</span>
+                  <p>{activeMemory.placeholder}</p>
+                </div>
+              )}
+
+              <div className="memory-popup-caption">
+                <h3>{activeMemory.label}</h3>
+                <p>{activeMemory.caption}</p>
+              </div>
+            </div>
+          </div>
+        )}
 
         <footer className="memories-footer">
           <p>And through every little moment, one thing remained the same...</p>
