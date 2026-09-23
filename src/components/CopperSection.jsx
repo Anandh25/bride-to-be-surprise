@@ -39,6 +39,8 @@ function CopperSection() {
                 src={copperImages[currentImage]}
                 alt={`Copper memory ${currentImage + 1}`}
                 className="copper-photo"
+                loading="lazy"
+                decoding="async"
               />
 
               {/* <span className="copper-photo-heart">♡</span> */}
