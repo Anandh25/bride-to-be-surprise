@@ -220,6 +220,7 @@ function Memories() {
                               alt={memory.placeholder}
                               className="memory-sample-image polaroid-photo-reveal"
                               loading="lazy"
+                              decoding="async"
                             />
                           ) : (
                             <>
