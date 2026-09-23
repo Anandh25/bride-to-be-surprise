@@ -52,8 +52,7 @@ const memoryChapters = [
           "Together, you were always twice the fun and probably twice the trouble. 😄",
         placeholder: "Sisters childhood photo",
         emoji: "👭",
-        image:
-          "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80",
+        image: "/images/sisters-2.jpeg",
       },
       {
         id: 5,
@@ -62,8 +61,7 @@ const memoryChapters = [
           "Some stories are too special to explain to anyone else. Only sisters understand.",
         placeholder: "Sisters bonding moment",
         emoji: "💌",
-        image:
-          "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=900&auto=format&fit=crop&q=80",
+        image: "/images/sisters-3.jpeg",
       },
       {
         id: 6,
@@ -72,8 +70,7 @@ const memoryChapters = [
           "Different chapters, different versions of you, but always the same team. ❤️",
         placeholder: "Recent sisters photo",
         emoji: "🤍",
-        image:
-          "https://images.unsplash.com/photo-1529636798458-92182e662485?w=900&auto=format&fit=crop&q=80",
+        image: "/images/sisters-1.jpeg",
       },
     ],
   },
@@ -91,8 +88,7 @@ const memoryChapters = [
           "No matter how grown up you become, you'll always be his little girl. ❤️",
         placeholder: "Bride with her father",
         emoji: "👨‍👧",
-        image:
-          "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80",
+        image: "/images/parents-2.jpeg",
       },
       {
         id: 8,
@@ -101,8 +97,7 @@ const memoryChapters = [
           "A love that comforted you, cheered for you, and stayed with you through every chapter.",
         placeholder: "Bride with her mother",
         emoji: "🌷",
-        image:
-          "https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=900&auto=format&fit=crop&q=80",
+        image: "/images/parents-3.jpg",
       },
       {
         id: 9,
@@ -111,8 +106,7 @@ const memoryChapters = [
           "Your first home, your forever people, and a love you'll carry wherever life takes you.",
         placeholder: "Family photo",
         emoji: "🏡",
-        image:
-          "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80",
+        image: "/images/parents-1.jpeg",
       },
     ],
   },

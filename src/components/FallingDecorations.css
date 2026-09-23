@@ -19,6 +19,7 @@
   will-change: transform, opacity;
 }
 
+/* Existing falling flowers and sparkles */
 @keyframes decoration-fall {
   0% {
     transform: translate3d(0, -30px, 0) rotate(0deg);
@@ -41,6 +42,48 @@
   100% {
     transform: translate3d(-25px, 110vh, 0) rotate(360deg);
     opacity: 0;
+  }
+}
+
+/* Copper's subtle paw-print fade animation */
+.paw-decoration {
+  top: auto;
+  color: #8066a8;
+  filter: drop-shadow(0 2px 4px rgb(128 102 168 / 12%));
+  animation-name: paw-fade;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes paw-fade {
+  0% {
+    opacity: 0;
+    transform: scale(0.75);
+  }
+
+  20% {
+    opacity: 0;
+    transform: scale(0.75);
+  }
+
+  32% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+
+  48% {
+    opacity: 0.3;
+    transform: scale(1.05);
+  }
+
+  60% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.9);
   }
 }
 
