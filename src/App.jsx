@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import gsap from "gsap";
 import "./App.css";
 import Memories from "./components/Memories";
-import FunnyMessages from "./components/FunnyMessages";
+import CopperSection from "./components/CopperSection";
 import SisterLetter from "./components/SisterLetter";
 import FinalBlessings from "./components/FinalBlessings";
 import FallingDecorations from "./components/FallingDecorations";
@@ -343,7 +343,7 @@ function App() {
       {hasOpened && (
         <>
           <Memories />
-          <FunnyMessages />
+          <CopperSection />
           <SisterLetter />
           <FinalBlessings />
         </>
